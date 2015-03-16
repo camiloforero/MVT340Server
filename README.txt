@@ -1,5 +1,6 @@
 MVT340Server v 0.1.1
 A Meitrack MVT340 TCP server for OpenGTS
+Original at https://github.com/camiloforero/MVT340Server
 
 Changelog:
 * 15/03/2015 - v. 0.1: Created the mvt340 server based on the OpenGTS template, it works.

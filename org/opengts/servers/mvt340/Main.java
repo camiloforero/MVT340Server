@@ -27,7 +27,7 @@
 //  2009/08/07  Martin D. Flynn
 //     -Updated to use DCServerConfig
 // ----------------------------------------------------------------------------
-package org.opengts.servers.meitrack340;
+package org.opengts.servers.mvt340;
 
 import java.lang.*;
 import java.util.*;

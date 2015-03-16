@@ -5,4 +5,4 @@
  * @author Camilo Forero
  *
  */
-package org.opengts.servers.meitrack340;
+package org.opengts.servers.mvt340;

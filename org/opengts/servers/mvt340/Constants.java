@@ -31,7 +31,7 @@
 
 // 	2015/03/15 Camilo Forero
 //		- Created based on org.opengts.servers.template.
-package org.opengts.servers.meitrack340;
+package org.opengts.servers.mvt340;
 
 import org.opengts.*;
 import org.opengts.util.*;

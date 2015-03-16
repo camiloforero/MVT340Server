@@ -90,7 +90,7 @@
 //     -Set "this.lastModemID" to fix recurring issue in "createGPSEvent" [B28]
 //      (thanks to Marjan Sudic for this fix)
 // ----------------------------------------------------------------------------
-package org.opengts.servers.meitrack340;
+package org.opengts.servers.mvt340;
 
 import java.lang.*;
 import java.text.DateFormat;

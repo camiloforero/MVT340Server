@@ -25,7 +25,7 @@
 //  2006/07/27  Martin D. Flynn
 //     -Moved constant information to 'Constants.java'
 // ----------------------------------------------------------------------------
-package org.opengts.servers.meitrack340;
+package org.opengts.servers.mvt340;
 
 import java.lang.*;
 import java.util.*;

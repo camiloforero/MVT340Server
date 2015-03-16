@@ -1,0 +1,47 @@
+        <DCServer name="mvt340">
+    
+        <!--
+         === DCS Description
+         -->
+        <Description><![CDATA[
+            Meitrack MVT340 Server
+            ]]></Description>
+            
+        <!-- 
+         === Possible Unique-ID prefixes ("*" means that the mobile-id is used as-is)
+         === Example: If the mobile-id is "123456789012345", then the "Unique ID" value
+         === set in the Device admin page can be one of the following:
+         ===   imei_123456789012345
+         ===   123456789012345
+         ===   <etc.>
+         -->
+        <UniqueIDPrefix><![CDATA[
+            mvt_
+            *
+            ]]></UniqueIDPrefix>
+            
+        <!-- 
+         === Listen ports
+         -->
+        <ListenPorts 
+            tcpPort="27868" 
+            udpPort="27868"
+            />
+            
+        <!--
+         === DCS runtime properties
+         -->
+        <Properties>
+            <!-- <Property key="parseFormat">1</Property>               -->
+            <!-- <Property key="minimumSpeedKPH">4.0</Property>         -->
+            <!-- <Property key="estimateOdometer">true</Property>       -->
+            <!-- <Property key="simulateGeozones">true</Property>       -->
+            <!-- <Property key="simulateDigitalInputs">0xFF</Property>  -->
+            <!-- <Property key="tcpIdleTimeoutMS">5000</Property>       -->
+            <!-- <Property key="tcpPacketTimeoutMS">10000</Property>    -->
+            <!-- <Property key="tcpSessionTimeoutMS">20000</Property>   -->
+            </Properties>
+        
+    </DCServer>
+
+    

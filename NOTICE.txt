@@ -1,0 +1,1 @@
+All of the java code comes from modifying the template server in OpenGTS, created by GeoTelematic.inc. I modified it under the terms of the Apache License, which is also associated to this piece of work. This code is free to use also, and the original (with possible future modifications) can be found at https://github.com/camiloforero/MVT340Server

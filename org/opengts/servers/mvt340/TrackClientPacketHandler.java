@@ -776,6 +776,7 @@ public class TrackClientPacketHandler
         double  speedKPH   	= StringTools.parseDouble(fld[10], 0.0);
         //double  heading    	= validGPS? StringTools.parseDouble(fld[ 9], 0.0) : 0.0;
         double  altitudeM  	= StringTools.parseDouble(fld[13], 0.0);  // 
+        double heading 		= StringTools.parseDouble(fld[11], 0);
 
         /* status code */
         int      statusCode = StatusCodes.STATUS_LOCATION;
@@ -813,6 +814,7 @@ public class TrackClientPacketHandler
         this.gpsEvent.setLongitude(longitude);
         this.gpsEvent.setSpeedKPH(speedKPH);
         this.gpsEvent.setAltitude(altitudeM);
+        this.gpsEvent.setHeading(heading);
 
         /* insert/return */
         if (this.parseInsertRecord_Common(this.gpsEvent)) {

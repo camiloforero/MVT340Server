@@ -779,7 +779,7 @@ public class TrackClientPacketHandler
         double heading 		= StringTools.parseDouble(fld[11], 0);
 
         /* status code */
-        int      statusCode = StatusCodes.STATUS_LOCATION;
+        int      statusCode = StatusCodes.STATUS_WAYMARK_8;
         if (eventCode == 35) {
             // "Position" event
             statusCode = StatusCodes.STATUS_LOCATION;
@@ -797,7 +797,7 @@ public class TrackClientPacketHandler
             statusCode = StatusCodes.STATUS_WAYMARK_0;
         } 
         else {
-            Print.logWarn("Unknown status code");
+            Print.logWarn("Unknown status code: " + eventCode);
         }
 
         /* GPS Event */

@@ -191,11 +191,7 @@ public class TrackClientPacketHandler
 
     // ------------------------------------------------------------------------
 
-    /* Ingore $GPRMC checksum? */
-    // (only applicable for data formats that include NMEA-0183 formatted event records)
-    private static       boolean IGNORE_NMEA_CHECKSUM       = false;
-
-    // ------------------------------------------------------------------------
+     // ------------------------------------------------------------------------
 
     /* GMT/UTC timezone */
     private static final TimeZone currentTimezone               = DateTime.getTimeZone("GMT-5");
@@ -512,11 +508,7 @@ public class TrackClientPacketHandler
 
     // ------------------------------------------------------------------------
 
-    /* set session terminate after next packet handling */
-    private void setTerminate()
-    {
-        this.terminate = true;
-    }
+   
     
     /* indicate that the session should terminate */
     // This method is called after each return from "getHandlePacket" to check to see
@@ -744,7 +736,9 @@ public class TrackClientPacketHandler
         // Example:
         //   $$C138,861074024599360,AAA,35,4.599293,-74.054281,150315214911,V,0,13,0,130,4.5,1118,182810,668350,732|123|083F|3445,0000,0018|||0294|0000,*B1
         //   $$00--,1--------------,2--,3-,4-------,5---------,6-----------,7,8,9-,0,11-,12-,13--,14----,15----,16---------------,17--,18--------------,*19
-        Print.logInfo("Parsing: " + s);
+        
+    	//For debug purposes
+    	//Print.logInfo("Parsing: " + s);
 
         /* pre-validate */
         if (StringTools.isBlank(s)) {
@@ -774,32 +768,43 @@ public class TrackClientPacketHandler
         long    fixtime    	= _parseDate(fld[6]);
         boolean validGPS   	= fld[3].equalsIgnoreCase("A");
         double  speedKPH   	= StringTools.parseDouble(fld[10], 0.0);
-        //double  heading    	= validGPS? StringTools.parseDouble(fld[ 9], 0.0) : 0.0;
         double  altitudeM  	= StringTools.parseDouble(fld[13], 0.0);  // 
         double heading 		= StringTools.parseDouble(fld[11], 0);
+        
+        int      statusCode;
+        
 
-        /* status code */
-        int      statusCode = StatusCodes.STATUS_WAYMARK_8;
-        if (eventCode == 35) {
-            // "Position" event
-            statusCode = StatusCodes.STATUS_LOCATION;
-        } else
-        if (eventCode == 24) {
-            // Lost signal
-            statusCode = StatusCodes.STATUS_GPS_LOST;
-        } else
-        if (eventCode == 25) {
-            // Recovered signal
-            statusCode = StatusCodes.STATUS_GPS_RESTORED;
-        } else
-        if (eventCode == 1) {
-            // SOS button is pressed
-            statusCode = StatusCodes.STATUS_WAYMARK_0;
-        } 
-        else {
-            Print.logWarn("Unknown status code: " + eventCode);
+        switch(eventCode)
+        {
+        case 1: //SOS button pressed
+        	statusCode = StatusCodes.STATUS_PANIC_ON;
+        	break;
+        case 2: //Input 1 active, in this case it means the ignition has been turned on
+        	statusCode = StatusCodes.STATUS_IGNITION_ON;
+        	break;
+        case 24: //Lost signal
+        	statusCode = StatusCodes.STATUS_GPS_LOST;
+        	break;
+        case 25: //Recovered signal
+        	statusCode = StatusCodes.STATUS_GPS_RESTORED;
+        	break;
+        case 28: //Antenna disconnected
+        	statusCode = StatusCodes.STATUS_GPS_ANTENNA_SHORT; 
+        	break;
+        case 29: //Device restarted
+        	statusCode = StatusCodes.STATUS_RESUME; 
+        	break;
+        case 35: //Position event
+        	statusCode = StatusCodes.STATUS_LOCATION;
+        	break;        	       
+        default: //Any other: logs the status code and saves the event as a Waymark 8
+        	statusCode = StatusCodes.STATUS_WAYMARK_8;
+        	Print.logWarn("Unknown status code: " + eventCode);
+        	break;        	
+        
         }
-
+        
+       
         /* GPS Event */
         this.gpsEvent = this.createGPSEvent(IMEI);
         if (this.gpsEvent == null) {

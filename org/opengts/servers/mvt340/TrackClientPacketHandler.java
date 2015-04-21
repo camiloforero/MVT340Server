@@ -782,6 +782,8 @@ public class TrackClientPacketHandler
         case 2: //Input 1 active, in this case it means the ignition has been turned on
         	statusCode = StatusCodes.STATUS_IGNITION_ON;
         	break;
+        case 23:
+        	statusCode = StatusCodes.STATUS_POWER_OFF;
         case 24: //Lost signal
         	statusCode = StatusCodes.STATUS_GPS_LOST;
         	break;

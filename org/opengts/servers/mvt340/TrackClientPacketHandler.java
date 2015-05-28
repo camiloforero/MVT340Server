@@ -779,11 +779,24 @@ public class TrackClientPacketHandler
         case 1: //SOS button pressed
         	statusCode = StatusCodes.STATUS_PANIC_ON;
         	break;
-        case 2: //Input 1 active, in this case it means the ignition has been turned on
+        case 2: //Input 2 active, in this case it means the ignition has been turned on
         	statusCode = StatusCodes.STATUS_IGNITION_ON;
+        	break;
+        case 10: //Input 2 inactive, in this case it means the ignition has been turned off
+        	statusCode = StatusCodes.STATUS_IGNITION_OFF;
+        	break;
+        case 17:
+        	statusCode = StatusCodes.STATUS_LOW_BATTERY;
+        	break;
+        case 19:
+        	statusCode = StatusCodes.STATUS_SPEEDING_BEGIN;
+        	break;
+        case 22:
+        	statusCode = StatusCodes.STATUS_POWER_ON;
         	break;
         case 23:
         	statusCode = StatusCodes.STATUS_POWER_OFF;
+        	break;
         case 24: //Lost signal
         	statusCode = StatusCodes.STATUS_GPS_LOST;
         	break;
@@ -805,6 +818,8 @@ public class TrackClientPacketHandler
         	break;        	
         
         }
+        
+       
         
        
         /* GPS Event */

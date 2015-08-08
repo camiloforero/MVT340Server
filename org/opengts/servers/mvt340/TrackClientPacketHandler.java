@@ -763,13 +763,17 @@ public class TrackClientPacketHandler
         String  IMEI 		= fld[1];
         String	commandType	= fld[2];
         int 	eventCode	= StringTools.parseInt(fld[3],0);
+        boolean validGPS   	= fld[3].equalsIgnoreCase("A");
         double  latitude   	= StringTools.parseDouble(fld[4],0);
         double  longitude  	= StringTools.parseDouble(fld[5],0);
         long    fixtime    	= _parseDate(fld[6]);
-        boolean validGPS   	= fld[3].equalsIgnoreCase("A");
+        int 	satNum		= StringTools.parseInt(fld[8],0);
         double  speedKPH   	= StringTools.parseDouble(fld[10], 0.0);
-        double  altitudeM  	= StringTools.parseDouble(fld[13], 0.0);  // 
         double heading 		= StringTools.parseDouble(fld[11], 0);
+        double  hAccuracy  	= StringTools.parseDouble(fld[12], 0.0);  // 
+        double  altitudeM  	= StringTools.parseDouble(fld[13], 0.0);  // 
+        double kilometraje 		= StringTools.parseDouble(fld[14], 0);
+        double analog = StringTools.parseHex(fld[18].split("|")[0], 1024);
         
         int      statusCode;
         
@@ -837,6 +841,10 @@ public class TrackClientPacketHandler
         this.gpsEvent.setSpeedKPH(speedKPH);
         this.gpsEvent.setAltitude(altitudeM);
         this.gpsEvent.setHeading(heading);
+        this.gpsEvent.setSatelliteCount(satNum);
+        this.gpsEvent.setHorzAccuracy(hAccuracy);
+        this.gpsEvent.setFieldValue("analog0", analog);
+        this.gpsEvent.setFieldValue("fuelLevel", analog/853.0);
 
         /* insert/return */
         if (this.parseInsertRecord_Common(this.gpsEvent)) {
